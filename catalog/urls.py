@@ -7,5 +7,5 @@ urlpatterns = [
 ]
 
 urlpatterns = [
-    path('contacts/', contact)
+    path('', contact)
 ]
