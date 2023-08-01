@@ -10,7 +10,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена за покупку')
     date = models.DateField(verbose_name='Дата создания')
     last_modified_date = models.DateField(verbose_name='Дата последнего изменения')
-    created_at = models.CharField(max_length=250, **NULLABLE, verbose_name='Создание')
+
 
     def __str__(self):
         return f'{self.name} ({self.category}): {self.price}'
