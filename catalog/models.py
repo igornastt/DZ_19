@@ -1,32 +1,35 @@
 from django.db import models
 
+NULLABLE = {'blank': True, 'null': True}  # константа для необязательного поля
 
-NULLABLE = {'blank': True, 'null':True}
 class Product(models.Model):
-    name = models.CharField(max_length=250, verbose_name='Название')
-    description = models.CharField(max_length=500, verbose_name='Описание')
-    image = models.ImageField(upload_to='product/', **NULLABLE, verbose_name='Изображение (превью)')
-    category = models.CharField(max_length=100, verbose_name='Категория')
-    price = models.IntegerField(verbose_name='Цена за покупку')
-    date = models.DateField(verbose_name='Дата создания')
-    last_modified_date = models.DateField(verbose_name='Дата последнего изменения')
+    title = models.CharField(max_length=150, verbose_name='наименование')
+    text = models.TextField(max_length=10000, verbose_name='описание')
+    image = models.ImageField(verbose_name='изображение', blank=True, null=True)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='категория', blank=True, null=True)
+    price = models.IntegerField(verbose_name='цена', blank=True, null=True)
+    date_creation = models.DateTimeField(verbose_name='дата создания', auto_now_add=True)
+    date_change = models.DateTimeField(verbose_name='дата изменений', auto_now=True)
 
 
     def __str__(self):
-        return f'{self.name} ({self.category}): {self.price}'
+        # Строковое отображение объекта
+        return f'{self.title}. {self.text}'
 
     class Meta:
-        verbose_name = 'продукт'
+        verbose_name = 'продукт'  # Настройка для наименования одного объекта
         verbose_name_plural = 'продукты'
-
+        ordering = ('title',)
 
 class Category(models.Model):
-    name = models.CharField(max_length=250, verbose_name='Название')
-    description = models.CharField(max_length=500, verbose_name='Описание')
+    title = models.CharField(max_length=150, verbose_name='наименование')
+    text = models.TextField(max_length=10000, verbose_name='описание')
 
     def __str__(self):
-        return f'{self.name} ({self.description})'
+        # Строковое отображение объекта
+        return f'{self.title}. {self.text}'
 
     class Meta:
-        verbose_name = 'категория'
+        verbose_name = 'кетегория'  # Настройка для наименования одного объекта
         verbose_name_plural = 'категории'
+        ordering = ('title',)
