@@ -2,7 +2,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('catalog', '0003_alter_category_options_alter_product_options_and_more'),
     ]
@@ -27,4 +26,3 @@ class Migration(migrations.Migration):
             },
         ),
     ]
-    
