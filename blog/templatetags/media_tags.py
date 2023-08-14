@@ -1,5 +1,5 @@
 from django import template
-from ..models import Blog
+from blog.models import Blog
 
 register = template.Library()
 
