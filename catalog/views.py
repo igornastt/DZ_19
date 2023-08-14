@@ -1,7 +1,7 @@
 from blog.models import Blog
 from catalog.models import Product
 
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 from django.views import View
 
 
@@ -28,7 +28,3 @@ def contacts(request):
         message = request.POST.get('message')
         print(f'{name} ({email}): {message}')
     return render(request, 'catalog/contacts.html')
-
-def blog_list_view(request):
-    blogs = Blog.objects.all()
-    return render(request, 'blog/list.html', {'blogs': blogs})
