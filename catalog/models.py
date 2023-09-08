@@ -5,11 +5,11 @@ NULLABLE = {'blank': True, 'null': True}  # константа для необя
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=150, verbose_name='наименование')
+    title = models.CharField(max_length=150, verbose_name='наименование', unique=True)
     text = models.TextField(max_length=10000, verbose_name='описание')
-    image = models.ImageField(verbose_name='изображение', blank=True, null=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='категория', blank=True, null=True)
-    price = models.IntegerField(verbose_name='цена', blank=True, null=True)
+    image = models.ImageField(verbose_name='изображение', **NULLABLE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='категория', unique=True, **NULLABLE)
+    price = models.IntegerField(verbose_name='цена', **NULLABLE)
     date_creation = models.DateTimeField(verbose_name='дата создания', auto_now_add=True)
     date_change = models.DateTimeField(verbose_name='дата изменений', auto_now=True)
 
